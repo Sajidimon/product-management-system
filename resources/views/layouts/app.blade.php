@@ -21,11 +21,6 @@
     <main class="container">
         @yield('content')
     </main>
-
-    <footer class="text-center my-4">
-        <hr>
-        <p>&copy; {{ date('Y') }} Product Management System</p>
-    </footer>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 

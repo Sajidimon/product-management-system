@@ -17,10 +17,10 @@
         <thead>
             <tr>
                 <th><a href="?sort=name&direction={{ request('direction') == 'asc' ? 'desc' : 'asc' }}">Name</a></th>
-                <th><a href="?sort=description&direction={{ request('direction') == 'asc' ? 'desc' : 'asc' }}">Description</a></th>
+                <th>Description</th>
                 <th><a href="?sort=price&direction={{ request('direction') == 'asc' ? 'desc' : 'asc' }}">Price</a></th>
-                <th><a href="?sort=stock&direction={{ request('direction') == 'asc' ? 'desc' : 'asc' }}">Stock</a></th>
-                <th><a href="?sort=image&direction={{ request('direction') == 'asc' ? 'desc' : 'asc' }}">Image</a></th>
+                <th>Stock</th>
+                <th>Image</th>
                 <th>Actions</th>
             </tr>
         </thead>
