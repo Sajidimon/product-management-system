@@ -36,8 +36,9 @@ class ProductController extends Controller
      */
     public function create()
     {
-        //
+        return view('products.create');
     }
+
 
     /**
      * Store a newly created resource in storage.
@@ -59,7 +60,8 @@ class ProductController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $product = Product::findOrFail($id);
+        return view('products.show', compact('product'));
     }
 
     /**
@@ -67,7 +69,7 @@ class ProductController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        return view('products.edit');
     }
 
     /**
