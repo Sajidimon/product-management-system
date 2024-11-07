@@ -8,20 +8,15 @@ use Illuminate\Http\Request;
 
 class ProductController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index(Request $request)
     {
         $query = Product::query();
 
-        // Search functionality
         if ($request->filled('search')) {
             $query->where('product_id', 'like', '%' . $request->search . '%')
                 ->orWhere('description', 'like', '%' . $request->search . '%');
         }
 
-        // Sorting functionality
         if ($request->filled('sort')) {
             $query->orderBy($request->sort, $request->get('direction', 'asc'));
         }
@@ -32,25 +27,19 @@ class ProductController extends Controller
     }
 
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
         return view('products.create');
     }
 
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
         $request->validate([
             'product_id' => 'required|unique:products|max:255',
             'name' => 'required|max:255',
             'price' => 'required|numeric',
-            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048', // Validation for image
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
 
         $product = new Product;
@@ -71,34 +60,25 @@ class ProductController extends Controller
     }
 
 
-    /**
-     * Display the specified resource.
-     */
     public function show(string $id)
     {
         $product = Product::findOrFail($id);
         return view('products.show', compact('product'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
     public function edit(string $id)
     {
         $product = Product::findOrFail($id);
         return view('products.edit', compact('product'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
     public function update(Request $request, $id)
     {
         $request->validate([
             'product_id' => 'required|max:255|unique:products,product_id,' . $id,
             'name' => 'required|max:255',
             'price' => 'required|numeric',
-            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048', // Validation for image
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
 
         $product = Product::findOrFail($id);
@@ -109,12 +89,11 @@ class ProductController extends Controller
         $product->stock = $request->stock;
 
         if ($request->hasFile('image')) {
-            // Delete the old image if it exists
+
             if ($product->image) {
                 Storage::disk('public')->delete($product->image);
             }
 
-            // Store the new image
             $imagePath = $request->file('image')->store('images', 'public');
             $product->image = $imagePath;
         }
@@ -125,10 +104,6 @@ class ProductController extends Controller
     }
 
 
-
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(Product $product)
     {
         $product->delete();

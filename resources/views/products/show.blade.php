@@ -9,7 +9,7 @@
     <p><strong>Stock:</strong> {{ $product->stock }}</p>
 
     @if ($product->image)
-        <img src="{{ asset('storage/' . $product->image) }}" alt="{{ $product->name }}" width="200">
+       <p><strong>Image:</strong> <img src="{{ asset('storage/' . $product->image) }}" alt="{{ $product->name }}" width="200"></p>
     @endif
 
 

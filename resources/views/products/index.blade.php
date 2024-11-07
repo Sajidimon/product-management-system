@@ -3,7 +3,6 @@
 @section('content')
     <h2 class="mb-4">Product List</h2>
 
-    <!-- Search Form -->
     <form action="{{ route('products.index') }}" method="GET" class="row g-3 mb-4">
         <div class="col-auto">
             <input type="text" name="search" class="form-control" placeholder="Search by ID or description"
@@ -14,12 +13,13 @@
         </div>
     </form>
 
-    <!-- Product Table -->
     <table class="table table-bordered">
         <thead>
             <tr>
                 <th><a href="?sort=name&direction={{ request('direction') == 'asc' ? 'desc' : 'asc' }}">Name</a></th>
+                <th><a href="?sort=description&direction={{ request('direction') == 'asc' ? 'desc' : 'asc' }}">Description</a></th>
                 <th><a href="?sort=price&direction={{ request('direction') == 'asc' ? 'desc' : 'asc' }}">Price</a></th>
+                <th><a href="?sort=stock&direction={{ request('direction') == 'asc' ? 'desc' : 'asc' }}">Stock</a></th>
                 <th><a href="?sort=image&direction={{ request('direction') == 'asc' ? 'desc' : 'asc' }}">Image</a></th>
                 <th>Actions</th>
             </tr>
@@ -28,7 +28,9 @@
             @foreach ($products as $product)
                 <tr>
                     <td>{{ $product->name }}</td>
+                    <td>{{ $product->description }}</td>
                     <td>${{ number_format($product->price, 2) }}</td>
+                    <td>{{ $product->stock }}</td>
                     <td>
                         @if ($product->image)
                             <img src="{{ asset('storage/' . $product->image) }}" alt="{{ $product->name }}" width="50">
@@ -49,7 +51,6 @@
         </tbody>
     </table>
 
-    <!-- Pagination -->
     <div class="d-flex justify-content-center">
         {{ $products->links('pagination::bootstrap-5') }}
     </div>
