@@ -16,7 +16,8 @@
     <table class="table table-bordered">
         <thead>
             <tr>
-                <th><a href="?sort=name&direction={{ request('direction') == 'asc' ? 'desc' : 'asc' }}">Name</a></th>
+                <th>Product Id</th>
+                <th><a href="?sort=name&direction={{ request('direction') == 'asc' ? 'desc' : 'asc' }}">Product Name</a></th>
                 <th>Description</th>
                 <th><a href="?sort=price&direction={{ request('direction') == 'asc' ? 'desc' : 'asc' }}">Price</a></th>
                 <th>Stock</th>
@@ -27,6 +28,7 @@
         <tbody>
             @foreach ($products as $product)
                 <tr>
+                    <td>{{ $product->product_id }}</td>
                     <td>{{ $product->name }}</td>
                     <td>{{ $product->description }}</td>
                     <td>${{ number_format($product->price, 2) }}</td>
