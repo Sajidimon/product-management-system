@@ -21,7 +21,7 @@ class ProductController extends Controller
             $query->orderBy($request->sort, $request->get('direction', 'asc'));
         }
 
-        $products = $query->paginate(2);
+        $products = $query->paginate(5);
 
         return view('products.index', compact('products'));
     }
